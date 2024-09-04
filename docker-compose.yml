@@ -28,5 +28,17 @@ services:
     ports:
       - "${POSTGRES_PORT}:5432"
 
+  frontend:
+    build: ./animal-shelter-frontend
+    volumes:
+      - ./animal-shelter-frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://web:8000
+    depends_on:
+      - web
+
 volumes:
   postgres_data:

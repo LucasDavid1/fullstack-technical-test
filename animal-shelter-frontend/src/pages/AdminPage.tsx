@@ -117,15 +117,6 @@ const AdminPage: React.FC = () => {
       console.error('Failed to delete animal:', error);
     }
   };
-
-  const handleCreateVolunteer = () => {
-    setIsCreateVolunteerModalOpen(true);
-  };
-  
-  const handleCloseVolunteerModal = async () => {
-    setIsCreateVolunteerModalOpen(false);
-    setVolunteers(await fetchVolunteers());
-  };
   
   const handleEditVolunteer = (volunteer: Volunteer) => {
     setVolunteerToEdit(volunteer);
