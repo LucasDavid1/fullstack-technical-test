@@ -175,11 +175,9 @@ class ProcessAdoptionView(APIView):
                 adoption.save()
                 return Response({"message": "Adoption approved successfully."}, status=status.HTTP_200_OK)
             elif action == 'reject':
-                adoption.status = 'rejected'
-                adoption.volunteer = request.user
                 adoption.animal.status = 'for_adoption'
                 adoption.animal.save()
-                adoption.save()
+                adoption.delete()
                 return Response({"message": "Adoption rejected."}, status=status.HTTP_200_OK)
             else:
                 return Response({"error": "Invalid action. Choose 'accept' or 'reject'."}, status=status.HTTP_400_BAD_REQUEST)
