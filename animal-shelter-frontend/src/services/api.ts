@@ -96,7 +96,7 @@ export const createAnimal = async (values: {
     status: 'adopted' | 'for_adoption' | 'waiting';
   }) => {
     try {
-      const response = await authApi.post('/create-animals/', values);
+      const response = await authApi.post('/animals/create/', values);
       return response.data;
     } catch (error) {
       console.error('Error creating animal:', error);
@@ -307,7 +307,7 @@ export const deleteAdoption = async (id: number) => {
 
 export const applyForAdoption = async (animalId: number) => {
     try {
-      const response = await authApi.post('/apply-adoption/', { animal_id: animalId });
+      const response = await authApi.post('/adoptions/apply/', { animal_id: animalId });
       return response.data;
     } catch (error) {
       console.error('Error applying for adoption:', error);
