@@ -328,4 +328,14 @@ export const processAdoption = async (adoptionId: number, action: 'accept' | 're
     }
 };
 
+export const fetchAdopterAdoptions = async () => {
+    try {
+        const response = await authApi.get('/adopter-adoptions/');
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching adopter adoptions:', error);
+        throw error;
+    }
+};
+
 export default api;

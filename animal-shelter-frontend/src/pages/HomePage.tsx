@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Text, Button, Container, Grid, Loader, Group, ActionIcon, Table } from '@mantine/core';
 import { IconSettings } from '@tabler/icons-react';
-import { fetchAnimals, applyForAdoption, processAdoption, fetchAdopters } from '../services/api';
-import { Adopter } from '../types';
+import { fetchAnimals, applyForAdoption, processAdoption, fetchAdopters, fetchAdopterAdoptions } from '../services/api';
+import { Adopter, Adoption } from '../types';
 import { useAuth } from '../context/AuthContext';
 
 
@@ -19,6 +19,7 @@ const HomePage: React.FC = () => {
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [adopters, setAdopters] = useState<Adopter[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [adopterAdoptions, setAdopterAdoptions] = useState<Adoption[]>([]);
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -28,8 +29,12 @@ const HomePage: React.FC = () => {
       setLoading(true);
       try {
         const data = await fetchAnimals();
-        console.log("fetchAnimals", data)
         setAnimals(data);
+        if (user && user.role === 'adopter') { 
+          const adoptionData = await fetchAdopterAdoptions();
+          console.log("adoptionData", adoptionData)
+          setAdopterAdoptions(adoptionData);
+        }
         if (user && user.role === 'volunteer') {
           const adopterData = await fetchAdopters();
           setAdopters(adopterData);
@@ -136,6 +141,32 @@ const HomePage: React.FC = () => {
     </>
   );
 
+  const renderAdopterAdoptionsTable = () => (
+    <>
+      <Text size="xl" mt="md">My Adoptions</Text>
+      <Table mt="md" miw={700}>
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>ID</Table.Th>
+            <Table.Th>Animal</Table.Th>
+            <Table.Th>Adoption Date</Table.Th>
+            <Table.Th>Status</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
+          {adopterAdoptions.map((adoption) => (
+            <Table.Tr key={adoption.id}>
+              <Table.Td>{adoption.id}</Table.Td>
+              <Table.Td>{adoption.animal.toString()}</Table.Td>
+              <Table.Td>{adoption.adoption_date}</Table.Td>
+              <Table.Td>{adoption.status}</Table.Td>
+            </Table.Tr>
+          ))}
+        </Table.Tbody>
+      </Table>
+    </>
+  );
+
   if (loading) {
     return <Loader size="xl" />;
   }
@@ -146,6 +177,7 @@ const HomePage: React.FC = () => {
         Animals Available for Adoption
       </Text>
       {renderAnimals()}
+      {user && user.role === 'adopter' && renderAdopterAdoptionsTable()}
       {user && user.role === 'volunteer' && renderAdoptersTable()} 
       {user && user.role === 'admin' && (
         <Button

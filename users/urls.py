@@ -24,6 +24,7 @@ urlpatterns = [
 
     # Adoptions 
     path('adoptions/', user_views.AdoptionListCreateView.as_view(), name='adoption-list-create'),
+    path('adopter-adoptions/', user_views.AdopterAdoptionsListView.as_view(), name='adopter-adoptions'),
     path('adoptions/<int:pk>/', user_views.AdoptionDetailView.as_view(), name='adoption-detail'), 
     path('adoptions/apply/', user_views.ApplyForAdoptionView.as_view(), name='apply-adoption'),
     path('adoptions/<int:pk>/process/', user_views.ProcessAdoptionView.as_view(), name='process-adoption'),

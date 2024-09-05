@@ -183,3 +183,15 @@ class ProcessAdoptionView(APIView):
                 return Response({"error": "Invalid action. Choose 'accept' or 'reject'."}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({"detail": "You do not have permission to perform this action."}, status=status.HTTP_403_FORBIDDEN)
+
+
+class AdopterAdoptionsListView(generics.ListAPIView):
+    serializer_class = AdoptionSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.role == 'adopter':
+            return user_services.get_adoptions_by_user_id(user.id)
+        else:
+            return []

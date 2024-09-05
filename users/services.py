@@ -40,3 +40,5 @@ def check_adoption_exists(adopter, animal, status):
     return Adoption.objects.filter(adopter=adopter, animal=animal, status=status).exists()
 
 
+def get_adoptions_by_user_id(user_id):
+    return Adoption.objects.filter(adopter_id=user_id)
