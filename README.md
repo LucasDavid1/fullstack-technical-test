@@ -94,3 +94,26 @@ npm start
 ## Usage
 - Go to `localhost:3000` and login with your admin user.
 - You also can register as an `adopter` or a `volunteer`.
+
+
+## TODOs
+- **Code Structure and Organization:**
+  - Separate Animal Models and Services (create `animals` app, move related code).
+  - Refactor User Management (separate serializers and views by user role).
+
+- **Testing:**
+  - Unit Tests.
+  - Integration Tests (component interactions).
+  - Frontend Testing.
+
+- **Frontend Design and User Experience:**
+  - Enhanced UI (footer, custom header, background).
+  - Loading States (spinners, progress bars).
+  - Error Handling and Messages (user-friendly feedback).
+  - Responsive Design (adapt to various screen sizes).
+
+- **Additional Features:**
+  - Animal Details Page (detailed info about animals).
+  - Search and Filtering (search by breed, type, status).
+  - User Profiles (manage information, view activity).
+  - Email Notifications (adoption updates, new animals).
