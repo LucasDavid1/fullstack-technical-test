@@ -4,7 +4,6 @@ import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/api';
 import { useAuth } from '../context/AuthContext';
-import { showNotification } from '@mantine/notifications';
 
 
 const LoginForm: React.FC = () => {
@@ -28,13 +27,9 @@ const LoginForm: React.FC = () => {
       login(data.access_token, data.user);
       console.log('Login successful:', data);
       navigate('/');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Login error:', error);
-      showNotification({
-        title: 'Login failed',
-        message: 'Incorrect username or password. Please try again.',
-        color: 'red',
-      });
+      alert(`Login Failed: An unexpected error occurred. Please try again.`); 
     }
   };
 

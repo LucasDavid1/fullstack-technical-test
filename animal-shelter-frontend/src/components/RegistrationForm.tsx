@@ -4,7 +4,6 @@ import '@mantine/core/styles.css';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/api';
-import { showNotification } from '@mantine/notifications';
 
 
 const RegistrationForm: React.FC = () => {
@@ -29,19 +28,11 @@ const RegistrationForm: React.FC = () => {
     try {
       const data = await registerUser(values);
       console.log('Registration successful:', data);
-      showNotification({
-        title: 'Registration Successful',
-        message: 'Your account has been created. You can now log in.',
-        color: 'green', 
-      });
+      alert('Registration successful! You can now log in.');
       navigate('/login');
     } catch (error) {
       console.error('Registration error:', error);
-      showNotification({
-        title: 'Registration Failed',
-        message: 'An error occurred during registration. Please try again.',
-        color: 'red',
-      });
+      alert('Registration failed. Please try again.');
     }
   };
 
