@@ -53,9 +53,10 @@ const HomePage: React.FC = () => {
     try {
       await applyForAdoption(animalId);
       fetchAnimals().then(data => setAnimals(data)); 
+      alert('Adoption applied successfully');
     } catch (error) {
       console.error('Error applying for adoption:', error);
-
+      alert('Error applying for adoption');
     }
   };
 
@@ -64,8 +65,10 @@ const HomePage: React.FC = () => {
       try {
         await processAdoption(animal.adoptionId, action);
         fetchAnimals().then(data => setAnimals(data));
+        alert(`Adoption ${action}ed successfully`);
       } catch (error) {
         console.error(`Error ${action}ing adoption:`, error);
+        alert(`Error ${action}ing adoption`);
       }
     } else {
       console.error('No adoption data available for the animal');
