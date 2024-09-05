@@ -111,7 +111,7 @@ export const updateAnimal = async (id: number, values: {
     animal_type: string;
     }) => {
     try {
-        const response = await authApi.put(`/update-animal/${id}/`, values);
+        const response = await authApi.put(`/animals/${id}/update/`, values);
         return response.data;
     } catch (error) {
         console.error('Error updating animal:', error);
@@ -217,22 +217,25 @@ export const createAdopter = async (values: {
 };
 
 export const updateAdopter = async (
-    id: number, 
-    values: { 
-      username: string; 
-      email: string; 
-      status: string; 
-      password?: string; 
+    id: number,
+    values: {
+      username: string;
+      email: string;
+      status: string;
+      password?: string;
     }
   ) => {
     try {
-      const response = await authApi.put(`/adopters/${id}/`, values);
+      const response = await authApi.put(`/adopters/${id}/`, {
+        ...values,
+        role: 'adopter',
+      });
       return response.data;
     } catch (error) {
       console.error('Error updating adopter:', error);
       throw error;
     }
-  };  
+};  
 
 export const createAdoption = async (values: {
     animal_id: number;

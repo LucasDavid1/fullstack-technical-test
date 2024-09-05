@@ -53,8 +53,10 @@ const AnimalCRUD: React.FC<AnimalCRUDProps> = ({ onCreate, onEdit, animalToEdit 
       if (onCreate) {
         onCreate();
       }
+      alert('Animal created successfully!');
     } catch (error) {
       console.error('Failed to create animal:', error);
+      alert('Failed to create animal. Please try again.');
     }
   };
 
@@ -69,8 +71,10 @@ const AnimalCRUD: React.FC<AnimalCRUDProps> = ({ onCreate, onEdit, animalToEdit 
         });
 
         onEdit?.();
+        alert('Animal updated successfully!');
       } catch (error) {
         console.error('Failed to update animal:', error);
+        alert('Failed to update animal. Please try again.');
       }
     }
   };

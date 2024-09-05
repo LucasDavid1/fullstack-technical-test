@@ -87,14 +87,16 @@ const AdoptionCRUD: React.FC<AdoptionCRUDProps> = ({ onCreate, onEdit, adoptionT
       setAnimalId(null);
       setAdopterId(null);
       setVolunteerId(null);
-      setAdoptionDate(new Date()); // Reset to current date
+      setAdoptionDate(new Date());
       setStatus('in_process');
 
       if (onCreate) {
         onCreate();
       }
+      alert('Adoption created successfully!');
     } catch (error) {
       console.error('Failed to create adoption:', error);
+      alert('Failed to create adoption. Please try again.');
     }
   };
 
@@ -105,15 +107,17 @@ const AdoptionCRUD: React.FC<AdoptionCRUDProps> = ({ onCreate, onEdit, adoptionT
           animal: animalId!,
           adopter: adopterId!,
           volunteer: volunteerId!,
-          adoption_date: adoptionDate!.toISOString().split('T')[0], // Format date correctly
+          adoption_date: adoptionDate!.toISOString().split('T')[0],
           status,
         });
 
         if (onEdit) {
           onEdit();
         }
+        alert('Adoption updated successfully!');
       } catch (error) {
         console.error('Failed to update adoption:', error);
+        alert('Failed to update adoption. Please try again.');
       }
     }
   };

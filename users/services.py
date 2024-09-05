@@ -6,6 +6,13 @@ def ping(request):
     return HttpResponse("Pong")
 
 
+def get_user_by_username(username):
+    try:
+        return User.objects.get(username=username)
+    except User.DoesNotExist:
+        return None
+
+
 def get_all_animals():
     return Animal.objects.all()
 

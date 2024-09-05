@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Table, Modal, Group, ActionIcon } from '@mantine/core';
+import { Box, Button, Table, Title, Modal, Group, ActionIcon } from '@mantine/core';
 import '@mantine/core/styles.css';
-import { IconEdit, IconTrash } from '@tabler/icons-react';
+import { IconEdit, IconTrash, IconDog, IconUsers, IconUser, IconHeartSpark } from '@tabler/icons-react';
 import { fetchAnimals, deleteAnimal, fetchVolunteers, deleteVolunteer, fetchAdopters, deleteAdopter, fetchAdoptions, deleteAdoption } from '../services/api'; 
 import AnimalCRUD from './admin/AnimalCRUD';
 import VolunteerCRUD from './admin/VolunteersCRUD';
@@ -139,8 +139,13 @@ const AdminPage: React.FC = () => {
 
   return (
     <Box maw={600} mx="auto">      
-      <h1>Animals</h1>
-      <Button onClick={handleCreateAnimalOpenModal}>Create New Animal</Button>
+      <Box maw={600} mx="auto">      
+        <Group>
+          <ActionIcon variant="transparent"> <IconDog size={24} /> </ActionIcon> 
+          <Title order={2}>Animals</Title> 
+        </Group>
+        <Button onClick={handleCreateAnimalOpenModal}>Create New Animal</Button>
+      </Box>
 
       {/* Table to display animals */}
       <Table miw={700}>
@@ -209,8 +214,14 @@ const AdminPage: React.FC = () => {
         /> 
       </Modal>
 
-      <h1>Volunteers</h1>
-      <Button onClick={() => setIsCreateVolunteerModalOpen(true)}>Create New Volunteer</Button>
+      <Box maw={600} mx="auto">      
+        <Group>
+          <ActionIcon variant="transparent"> <IconUsers size={24} /> </ActionIcon> 
+          <Title order={2}>Volunteers</Title> 
+        </Group>
+        <Button onClick={() => setIsCreateVolunteerModalOpen(true)}>Create New Volunteer</Button>
+      </Box>
+      
       <Table miw={700}>
         <Table.Thead>
           <Table.Tr>
@@ -282,8 +293,13 @@ const AdminPage: React.FC = () => {
         />
       </Modal>
 
-      <h1>Adopters</h1>
-      <Button onClick={() => setIsCreateAdopterModalOpen(true)}>Create New Adopter</Button>
+      <Box maw={600} mx="auto">      
+        <Group>
+          <ActionIcon variant="transparent"> <IconUser size={24} /> </ActionIcon> 
+          <Title order={2}>Adopters</Title> 
+        </Group>
+        <Button onClick={() => setIsCreateAdopterModalOpen(true)}>Create New Adopter</Button>
+      </Box>
       <Table miw={700}>
         <Table.Thead>
           <Table.Tr>
@@ -351,8 +367,13 @@ const AdminPage: React.FC = () => {
         />
       </Modal>
 
-      <h1>Adoptions</h1>
-      <Button onClick={() => setIsCreateAdoptionModalOpen(true)}>Create New Adoption</Button>
+      <Box maw={600} mx="auto">      
+        <Group>
+          <ActionIcon variant="transparent"> <IconHeartSpark size={24} /> </ActionIcon> 
+          <Title order={2}>Adoptions</Title> 
+        </Group>
+        <Button onClick={() => setIsCreateAdopterModalOpen(true)}>Create New Adopter</Button>
+      </Box>
       <Table miw={700}>
         <Table.Thead>
           <Table.Tr>

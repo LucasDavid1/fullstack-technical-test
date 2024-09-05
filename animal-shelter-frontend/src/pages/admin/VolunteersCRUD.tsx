@@ -47,8 +47,10 @@ const VolunteerCRUD: React.FC<VolunteerCRUDProps> = ({ onCreate, onEdit, volunte
       if (onCreate) {
         onCreate();
       }
+      alert('Volunteer created successfully!');
     } catch (error) {
       console.error('Failed to create volunteer:', error);
+      alert('Failed to create volunteer. Please try again.');
     }
   };
 
@@ -65,8 +67,10 @@ const VolunteerCRUD: React.FC<VolunteerCRUDProps> = ({ onCreate, onEdit, volunte
         await updateVolunteer(volunteerToEdit.id, updatedData);
 
         onEdit?.();
+        alert('Volunteer updated successfully!');
       } catch (error) {
         console.error('Failed to update volunteer:', error);
+        alert('Failed to update volunteer. Please try again.');
       }
     }
   };

@@ -33,8 +33,10 @@ const AdopterCRUD: React.FC<AdopterCRUDProps> = ({ onCreate, onEdit, adopterToEd
           ...(password && { password }),
         });
         onEdit?.(); 
+        alert('Adopter updated successfully!');
       } catch (error) {
         console.error('Failed to update adopter:', error);
+        alert('Failed to update adopter. Please try again.');
       }
     }
   };
@@ -53,9 +55,11 @@ const AdopterCRUD: React.FC<AdopterCRUDProps> = ({ onCreate, onEdit, adopterToEd
       setStatus('active');
       setPassword('');
 
-      onCreate?.(); 
+      onCreate?.();
+      alert('Adopter created successfully!');
     } catch (error) {
       console.error('Failed to create adopter:', error);
+      alert('Failed to create adopter. Please try again.');
     }
   };
 

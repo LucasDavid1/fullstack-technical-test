@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from django.contrib.auth.hashers import make_password
+
 from users.models import User, Animal, Adoption
 
 
@@ -11,8 +13,14 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user
+        validated_data['password'] = make_password(validated_data.get('password'))
+        return super(UserSerializer, self).create(validated_data)
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop('password', None)
+        if password:
+            instance.password = make_password(password)
+        return super(UserSerializer, self).update(instance, validated_data)
 
 
 class AdoptionSerializer(serializers.ModelSerializer):

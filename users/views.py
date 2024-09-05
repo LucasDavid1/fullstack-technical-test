@@ -3,7 +3,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
-from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import check_password
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.exceptions import PermissionDenied
@@ -18,8 +18,8 @@ def login_view(request):
     username = request.data.get('username')
     password = request.data.get('password')
 
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
+    user = user_services.get_user_by_username(username)
+    if check_password(password, user.password):
         # Generate token
         refresh = RefreshToken.for_user(user)
         access_token = str(refresh.access_token)
