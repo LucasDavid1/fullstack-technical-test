@@ -104,7 +104,7 @@ class VolunteerDetailView(generics.RetrieveUpdateDestroyAPIView):
 class AdopterListCreateView(generics.ListCreateAPIView):
     queryset = user_services.get_users_by_role('adopter')
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = [IsAuthenticated]
 
 
 class AdopterDetailView(generics.RetrieveUpdateDestroyAPIView):

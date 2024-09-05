@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Text, Button, Container, Grid, Loader, Group, ActionIcon } from '@mantine/core';
+import { Card, Text, Button, Container, Grid, Loader, Group, ActionIcon, Table } from '@mantine/core';
 import { IconSettings } from '@tabler/icons-react';
-import { fetchAnimals, applyForAdoption, processAdoption } from '../services/api';
+import { fetchAnimals, applyForAdoption, processAdoption, fetchAdopters } from '../services/api';
+import { Adopter } from '../types';
 import { useAuth } from '../context/AuthContext';
 
 
@@ -16,6 +17,7 @@ interface Animal {
 
 const HomePage: React.FC = () => {
   const [animals, setAnimals] = useState<Animal[]>([]);
+  const [adopters, setAdopters] = useState<Adopter[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -28,6 +30,10 @@ const HomePage: React.FC = () => {
         const data = await fetchAnimals();
         console.log("fetchAnimals", data)
         setAnimals(data);
+        if (user && user.role === 'volunteer') {
+          const adopterData = await fetchAdopters();
+          setAdopters(adopterData);
+        }
       } catch (error) {
         console.error('Failed to fetch animals:', error);
       } finally {
@@ -36,7 +42,7 @@ const HomePage: React.FC = () => {
     };
 
     loadAnimals();
-  }, []);
+  }, [user]);
 
   const handleApplyForAdoption = async (animalId: number) => {
     try {
@@ -104,6 +110,32 @@ const HomePage: React.FC = () => {
     </Grid>
   );
 
+  const renderAdoptersTable = () => (
+    <>
+    <Text size="xl" mt="md">Adopters</Text> 
+    <Table mt="md" miw={700}>
+      <Table.Thead>
+        <Table.Tr>
+          <Table.Th>ID</Table.Th>
+          <Table.Th>Username</Table.Th>
+          <Table.Th>Email</Table.Th>
+          <Table.Th>Status</Table.Th>
+        </Table.Tr>
+      </Table.Thead>
+      <Table.Tbody>
+        {adopters.map((adopter) => (
+          <Table.Tr key={adopter.id}>
+            <Table.Td>{adopter.id}</Table.Td>
+            <Table.Td>{adopter.username}</Table.Td>
+            <Table.Td>{adopter.email}</Table.Td>
+            <Table.Td>{adopter.status}</Table.Td>
+          </Table.Tr>
+        ))}
+      </Table.Tbody>
+    </Table>
+    </>
+  );
+
   if (loading) {
     return <Loader size="xl" />;
   }
@@ -114,6 +146,7 @@ const HomePage: React.FC = () => {
         Animals Available for Adoption
       </Text>
       {renderAnimals()}
+      {user && user.role === 'volunteer' && renderAdoptersTable()} 
       {user && user.role === 'admin' && (
         <Button
         fullWidth
