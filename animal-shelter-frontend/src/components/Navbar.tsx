@@ -2,20 +2,14 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext'; 
 import { NavLink, useNavigate } from 'react-router-dom';
 import { UnstyledButton, Tooltip, rem, Group, Text } from '@mantine/core'; 
-import { IconHome2, IconDog, IconUsers, IconLogout } from '@tabler/icons-react';
+import { IconHome2, IconLogout, IconSettings } from '@tabler/icons-react';
 import classes from './Navbar.module.css';
 
-const mainLinks = [
-  { icon: IconHome2, label: 'Home', to: '/' },
-  { icon: IconDog, label: 'Animals', to: '/animals' },
-  { icon: IconUsers, label: 'Volunteers', to: '/volunteers' },
-  { icon: IconLogout, label: 'Logout', to: '/login' },
-];
 
 const Navbar: React.FC = () => {
   const [active, setActive] = useState('Home');
-  const navigate = useNavigate(); 
-  const { logout } = useAuth();
+  const navigate = useNavigate();
+  const { logout, user } = useAuth();
 
   const handleLinkClick = (label: string, to: string) => {
     setActive(label);
@@ -25,7 +19,18 @@ const Navbar: React.FC = () => {
     }
   };
 
-  const navLinks = mainLinks.map((link) => (
+  const adminLinks = [
+    { icon: IconHome2, label: 'Home', to: '/' },
+    { icon: IconSettings, label: 'Admin Management', to: '/admin' },
+    { icon: IconLogout, label: 'Logout', to: '/login' },
+  ];
+
+  const nonAdminLinks = [
+    { icon: IconHome2, label: 'Home', to: '/' },
+    { icon: IconLogout, label: 'Logout', to: '/login' },
+  ];
+
+  const navLinks = (user && user.role === 'admin' ? adminLinks : nonAdminLinks).map((link) => (
     <Tooltip
       label={link.label}
       position="right"

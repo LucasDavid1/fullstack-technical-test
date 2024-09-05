@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Text, Button, Container, Grid, Loader, Group } from '@mantine/core';
+import { Card, Text, Button, Container, Grid, Loader, Group, ActionIcon } from '@mantine/core';
+import { IconSettings } from '@tabler/icons-react';
 import { fetchAnimals, applyForAdoption, processAdoption } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 
@@ -113,29 +114,18 @@ const HomePage: React.FC = () => {
         Animals Available for Adoption
       </Text>
       {renderAnimals()}
-      {user ? (
-        user.role === 'admin' ? (
-          <Button 
-            fullWidth
-            mt="md"
-            onClick={() => navigate('/admin')}
-            >
-            Admin Actions
-          </Button>
-        ) : user.role === 'volunteer' ? (
-          <Button fullWidth mt="md">
-            Volunteer Actions
-          </Button>
-        ) : user.role === 'adopter' ? (
-          <Button fullWidth mt="md">
-            Adopter Actions
-          </Button>
-        ) : (
-          <Text>Unknown User Role</Text> 
-        )
-      ) : (
-        <Text>Loading user data...</Text>
-      )}
+      {user && user.role === 'admin' && (
+        <Button
+        fullWidth
+        mt="md"
+        onClick={() => navigate('/admin')}
+      >
+        <ActionIcon>
+          <IconSettings size={18} />
+        </ActionIcon>
+        Admin Management
+      </Button>
+      )} 
     </Container>
   );
 };
