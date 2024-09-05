@@ -35,32 +35,7 @@ This is the [SonarCloud](https://sonarcloud.io/project/overview?id=LucasDavid1_f
 
 ## Project Structure
 
-fullstack-technical-test/
-├── core/ # Django backend settings
-│ ├── settings.py
-│ ├── urls.py
-│ └── ...
-├── users/ # Django app for user and animal management
-│ ├── models.py
-│ ├── views.py
-│ ├── serializers.py
-│ └── ...
-├── animal-shelter-frontend/ # React frontend project
-│ ├── src/
-│ │ ├── App.tsx
-│ │ ├── components/
-│ │ ├── pages/
-│ │ ├── services/
-│ │ └── ...
-│ ├── package.json
-│ └── ...
-├── Dockerfile
-├── docker-compose.yml
-├── Makefile
-├── requirements.txt
-├── .env
-└── README.md
-
+![image](https://github.com/user-attachments/assets/2802dcdb-46ae-4062-8f2b-b8c34753a275)
 
 ## Installation
 
