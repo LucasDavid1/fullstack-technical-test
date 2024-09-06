@@ -3,6 +3,7 @@
 This project is a full-stack web application for managing an animal shelter. It provides a REST API built with Django REST Framework and a web client built with React and TypeScript using the Mantine UI framework.
 
 This is the [SonarCloud](https://sonarcloud.io/project/overview?id=LucasDavid1_fullstack-technical-test) link for the project.
+This is the [Pull request](https://github.com/LucasDavid1/fullstack-technical-test/pull/1) from myself to fix a bug.
 
 ## Table of Contents
 
