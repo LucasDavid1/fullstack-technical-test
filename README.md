@@ -75,6 +75,7 @@ npm start
 - **Code Structure and Organization:**
   - Separate Animal Models and Services (create `animals` app, move related code).
   - Separate `src/api.ts` in more files by topic, like users, animals, etc.
+  - Change admin management view (`AdminPage.tsx`) so it uses only one endpoint to retrieve all users and then filter them by role and others fields.
   - Improve user login, like with JWT tokens with silent refresh by storing the access token in memory and the refresh token in httpOnly cookies.
 
 - **Testing:**
