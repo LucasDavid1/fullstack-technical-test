@@ -74,7 +74,8 @@ npm start
 ## TODOs
 - **Code Structure and Organization:**
   - Separate Animal Models and Services (create `animals` app, move related code).
-  - Refactor User Management (separate serializers and views by user role).
+  - Separate `src/api.ts` in more files by topic, like users, animals, etc.
+  - Improve user login, like with JWT tokens with silent refresh by storing the access token in memory and the refresh token in httpOnly cookies.
 
 - **Testing:**
   - Unit Tests.
