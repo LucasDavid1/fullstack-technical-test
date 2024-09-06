@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext'; 
 import { NavLink, useNavigate } from 'react-router-dom';
 import { UnstyledButton, Tooltip, rem, Group, Text } from '@mantine/core'; 
-import { IconHome2, IconLogout, IconSettings } from '@tabler/icons-react';
+import { IconHome2, IconLogout, IconSettings, IconUser, IconHeartSpark, IconTie } from '@tabler/icons-react';
+import { ForwardRefExoticComponent } from 'react';
 import classes from './Navbar.module.css';
 
 
@@ -18,6 +19,24 @@ const Navbar: React.FC = () => {
       navigate(to);
     }
   };
+
+  const getRoleIcon = (): ForwardRefExoticComponent<any> | null => {
+    if (user) {
+      switch (user.role) {
+        case 'admin':
+          return IconTie;
+        case 'adopter':
+          return IconUser;
+        case 'volunteer':
+          return IconHeartSpark;
+        default:
+          return null;
+      }
+    }
+    return null;
+  };
+
+  const RoleIcon = getRoleIcon();
 
   const adminLinks = [
     { icon: IconHome2, label: 'Home', to: '/' },
@@ -56,7 +75,19 @@ const Navbar: React.FC = () => {
         <Text size="lg">
           Animal Shelter
         </Text>
-        {navLinks} 
+        {navLinks}
+        {RoleIcon && (
+          <Tooltip
+            label={user?.role}
+            position="right"
+            withArrow
+            transitionProps={{ duration: 0 }}
+          >
+            <UnstyledButton className={classes.mainLink}>
+              <RoleIcon style={{ width: rem(22), height: rem(22) }} stroke={1.5} />
+            </UnstyledButton>
+          </Tooltip>
+        )}
       </Group>
     </nav>
   );
