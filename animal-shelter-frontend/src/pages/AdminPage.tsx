@@ -372,7 +372,7 @@ const AdminPage: React.FC = () => {
           <ActionIcon variant="transparent"> <IconHeartSpark size={24} /> </ActionIcon> 
           <Title order={2}>Adoptions</Title> 
         </Group>
-        <Button onClick={() => setIsCreateAdopterModalOpen(true)}>Create New Adopter</Button>
+        <Button onClick={() => setIsCreateAdoptionModalOpen(true)}>Create New Adoption</Button>
       </Box>
       <Table miw={700}>
         <Table.Thead>
