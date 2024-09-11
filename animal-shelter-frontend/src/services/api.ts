@@ -121,7 +121,7 @@ export const updateAnimal = async (id: number, values: {
 
 export const deleteAnimal = async (id: number) => {
     try {
-        const response = await authApi.delete(`/delete-animal/${id}/`);
+        const response = await authApi.delete(`/animals/${id}/delete/`);
         return response.data;
     } catch (error) {
         console.error('Error deleting animal:', error);

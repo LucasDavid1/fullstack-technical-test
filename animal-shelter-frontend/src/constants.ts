@@ -1,5 +1,5 @@
 export const ANIMAL_TYPES = ['dog', 'cat'] as const;
-export const ANIMAL_STATUSES = ['adopted', 'for_adoption', 'waiting'] as const;
+export const ANIMAL_STATUSES = ['adopted', 'for_adoption'] as const;
 
 export type AnimalType = typeof ANIMAL_TYPES[number];
 export type AnimalStatus = typeof ANIMAL_STATUSES[number];
