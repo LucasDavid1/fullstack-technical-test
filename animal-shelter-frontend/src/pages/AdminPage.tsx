@@ -113,8 +113,10 @@ const AdminPage: React.FC = () => {
       await deleteAnimal(animalId);
       const updatedAnimals = await fetchAnimals();
       setAnimals(updatedAnimals);
+      alert('Animal deleted successfully');
     } catch (error) {
       console.error('Failed to delete animal:', error);
+      alert('Failed to delete animal');
     }
   };
   
