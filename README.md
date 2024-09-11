@@ -3,6 +3,7 @@
 This project is a full-stack web application for managing an animal shelter. It provides a REST API built with Django REST Framework and a web client built with React and TypeScript using the Mantine UI framework.
 
 This is the [SonarCloud](https://sonarcloud.io/project/overview?id=LucasDavid1_fullstack-technical-test) link for the project.
+This is the [Pull request](https://github.com/LucasDavid1/fullstack-technical-test/pull/1) from myself to fix a bug.
 
 ## Table of Contents
 
@@ -74,6 +75,7 @@ npm start
 ## TODOs
 - **Code Structure and Organization:**
   - Separate Animal Models and Services (create `animals` app, move related code).
+  - Pagination for retrieving data.
   - Separate `src/api.ts` in more files by topic, like users, animals, etc.
   - Change admin management view (`AdminPage.tsx`) so it uses only one endpoint to retrieve all users and then filter them by role and others fields.
   - Improve user login, like with JWT tokens with silent refresh by storing the access token in memory and the refresh token in httpOnly cookies.
